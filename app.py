@@ -362,7 +362,6 @@ with st.sidebar:
     st.markdown("**Optional files**")
     f_assess   = st.file_uploader("sp800-53ar5-assessment-procedures.csv", type="csv",        key="u_assess")
     f_mdr      = st.file_uploader("synthetic_threat_report.md",            type=["md","txt"], key="u_mdr")
-    f_remed    = st.file_uploader("remediation_guidance.csv",               type="csv",        key="u_remed")
 
     # ── Readiness check ──
     catalog_needed = not use_existing_faiss
@@ -393,7 +392,6 @@ with st.sidebar:
         }
         if f_catalog: file_map["NIST_SP-800-53_rev5_catalog_load.csv"] = f_catalog.read()
         if f_assess:  file_map["sp800-53ar5-assessment-procedures.csv"] = f_assess.read()
-        if f_remed:   file_map["remediation_guidance.csv"]              = f_remed.read()
         mdr_bytes = f_mdr.read() if f_mdr else None
 
         try:
