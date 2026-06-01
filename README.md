@@ -16,11 +16,18 @@ For each of the top-5 risks, the system outputs:
 - **Active IOCs** — from the MDR advisory, matched per threat actor
 ---
 
-## Live Demo: https://huggingface.co/spaces/KapishRastogi/tawasol-cyber-risk
+## Live Demo
+**URL:** https://huggingface.co/spaces/KapishRastogi/tawasol-cyber-risk
 
-- **Note:** The live demo runs on HuggingFace Spaces free tier which does not persist files between sessions. Once you run the pipeline and results are generated, **download the output files immediately** using the download buttons in the sidebar before closing or refreshing the page. Files are not saved between sessions.
+**Note:** The live demo runs on HuggingFace Spaces free tier which does not persist files between sessions. Once you run the pipeline and results are generated, download the output files immediately using the download buttons in the sidebar before closing or refreshing the page.
 
-- To view pre-computed results without running the pipeline, the output files are committed to this GitHub repository and can be viewed directly.
+To view pre-computed results without running the pipeline, the output files are committed to this GitHub repository and can be viewed directly.
+
+**Models used in the live demo (lightweight for deployment):**
+- Embedding : `sentence-transformers/all-MiniLM-L6-v2` (80 MB)
+- Reranker  : `cross-encoder/ms-marco-MiniLM-L-6-v2` (80 MB)
+
+These were chosen for the hosted demo due to memory constraints on the free tier. The recommended models for local runs are `BAAI/bge-large-en-v1.5` (1.3 GB) and `BAAI/bge-reranker-base` (278 MB), which produce higher quality retrieval results.
 
 ## Run locally
 
