@@ -16,6 +16,12 @@ For each of the top-5 risks, the system outputs:
 - **Active IOCs** — from the MDR advisory, matched per threat actor
 ---
 
+## Live Demo: https://huggingface.co/spaces/KapishRastogi/tawasol-cyber-risk
+
+- **Note:** The live demo runs on HuggingFace Spaces free tier which does not persist files between sessions. Once you run the pipeline and results are generated, **download the output files immediately** using the download buttons in the sidebar before closing or refreshing the page. Files are not saved between sessions.
+
+- To view pre-computed results without running the pipeline, the output files are committed to this GitHub repository and can be viewed directly.
+
 ## Run locally
 
 ### Step 1 — Clone the repository
