@@ -41,10 +41,11 @@ from google.genai import types
 # ─────────────────────────────────────────────
 
 MATURITY_RANK = {
-    "Active Exploitation": 5,
-    "Weaponized":          4,
-    "Commodity Exploit":   3,
-    "Proof of Concept":    2,
+    "Active Exploitation": 6,
+    "Weaponized":          5,
+    "Commodity Exploit":   4,
+    "Proof of Concept":    3,
+    "Social Engineering":  2,
     "Not Applicable":      1,
 }
 

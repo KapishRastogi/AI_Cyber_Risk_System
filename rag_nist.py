@@ -50,7 +50,7 @@ from google.genai import types
 # ─────────────────────────────────────────────
 
 BGE_QUERY_INSTRUCTION = "Represent this sentence for searching relevant passages: "
-GEMINI_MODEL    = "gemini-2.0-flash"
+GEMINI_MODEL    = "gemini-2.5-flash"
 TOP_K           = 5
 RERANK_FETCH    = 15     # candidates fetched by FAISS before reranking
 MIN_SIMILARITY  = 0.35

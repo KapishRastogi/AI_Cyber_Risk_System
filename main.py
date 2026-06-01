@@ -4,7 +4,7 @@ TawasolPay — Complete AI Cyber Risk System
 Full pipeline in one command:
 
   Step 1–6 : Load CSVs → join → score → top 5     (~10 sec)
-  Step 7   : Load mxbai-embed-large-v1 locally     (~30 sec first run)
+  Step 7   : Load bge model locally     (~30 sec first run)
   Step 8   : Embed 1189 NIST chunks locally         (~1-3 min CPU)
   Step 9   : RAG for each top-5 risk                (~30 sec, 5 Gemini calls)
   Step 10  : Print complete readable report         (instant)
@@ -15,7 +15,7 @@ Requirements:
 
 Environment variables:
     GEMINI_API_KEY  — required for generation step only
-    (mxbai embeddings run locally, no key needed)
+    (bge embeddings run locally, no key needed)
 
 Run:
     export GEMINI_API_KEY=your_key_here
@@ -323,7 +323,7 @@ def print_report(top5):
     print(f"  Generated  : {datetime.now().strftime('%Y-%m-%d %H:%M')}")
     print(f"  Scope      : 60 assets · 114 vulnerabilities · 40 threat campaigns")
     print(f"  Scoring    : weighted additive, 5 dimensions, absolute 0–100")
-    print(f"  Embeddings : mxbai-embed-large-v1 (local, HuggingFace)")
+    print(f"  Embeddings : bge model (local, HuggingFace)")
     print(f"  Guidance   : NIST SP 800-53 Rev. 5 via RAG + Gemini 1.5 Flash")
     print("="*70)
 
@@ -383,7 +383,7 @@ def print_report(top5):
 
     print(f"\n{'='*70}")
     print(f"  End of report — {len(top5)} risks require immediate action")
-    print(f"  Guidance source: NIST SP 800-53 Rev. 5 (RAG · mxbai + Gemini)")
+    print(f"  Guidance source: NIST SP 800-53 Rev. 5 (RAG · bge + Gemini)")
     print(f"{'='*70}\n")
 
 
@@ -458,7 +458,7 @@ def main():
         mdr_data = parse_mdr_report(
             report_path=str(MDR_REPORT_PATH),
             gemini_client=_client,
-            gemini_model="gemini-2.0-flash",
+            gemini_model="gemini-2.5-flash",
             out_dir=str(OUT_DIR),
         )
 
@@ -487,7 +487,7 @@ def main():
     top5, df_all= select_top5(df, ioc_map=ioc_map)
 
     # Steps 7–9: RAG
-    print("\n[7/11] Loading mxbai-embed-large-v1 from HuggingFace...")
+    print("\n[7/11] Loading bge-embed-large-v1 from HuggingFace...")
     print("[8/11] Embedding 1189 NIST controls locally...")
     rag = NISTRag(
         gemini_api_key=api_key,

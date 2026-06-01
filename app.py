@@ -197,7 +197,7 @@ def run_pipeline(file_map: dict, api_key: str,
         from mdr_processor import parse_mdr_report, apply_mdr_overrides, build_ioc_map
         cl = _g.Client(api_key=api_key)
         mdr_result  = parse_mdr_report(str(DATA_SAVED/"synthetic_threat_report.md"),
-                                        cl, "gemini-2.0-flash", str(RESULTS_DIR))
+                                        cl, "gemini-2.5-flash", str(RESULTS_DIR))
         threats, change_log = apply_mdr_overrides(threats, mdr_result, str(RESULTS_DIR))
         ioc_map = build_ioc_map(mdr_result)
         st.write(f"   ✅ {len(change_log)} overrides applied | {len(ioc_map)} actors with IOCs")
