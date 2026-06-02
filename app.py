@@ -426,6 +426,12 @@ with st.sidebar:
                 "rag_queries_and_retrieved.json", "application/json", use_container_width=True
             )
         st.caption(f"Files also saved to:\n`{RESULTS_DIR}`")
+        st.markdown("---")
+        if st.button("🔄 Start Fresh", use_container_width=True,
+                     help="Clear all results and start from scratch"):
+            st.session_state.results      = None
+            st.session_state.pipeline_ran = False
+            st.rerun()
 
 
 # ─────────────────────────────────────────────
