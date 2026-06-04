@@ -30,6 +30,7 @@ import re
 import json
 import time
 from pathlib import Path
+import torch
 
 import numpy as np
 import pandas as pd
@@ -302,7 +303,8 @@ class NISTRag:
         try:
             from sentence_transformers import SentenceTransformer
             # Force CPU -- avoids Mac MPS "Invalid buffer size" memory error
-            self.model = SentenceTransformer(self.model_name, device="cpu")
+            device = "mps" if torch.backends.mps.is_available() else "cpu"
+            self.model = SentenceTransformer(self.model_name, device=device)
             test = self.model.encode(["test"], show_progress_bar=False)
             print(f"[RAG] Model ready -- device: cpu -- dimensions: {test.shape[1]}")
         except ImportError:
@@ -341,7 +343,8 @@ class NISTRag:
         print(f"\n[RAG] Loading reranker: {RERANKER_MODEL}...")
         try:
             from sentence_transformers import CrossEncoder
-            self.reranker = CrossEncoder(RERANKER_MODEL, device="cpu")
+            device = "mps" if torch.backends.mps.is_available() else "cpu"
+            self.reranker = CrossEncoder(RERANKER_MODEL, device=device)
             print(f"[RAG] Reranker ready -- cross-encoder reranking enabled")
         except Exception as e:
             print(f"[RAG] Reranker not loaded ({e}) -- cosine similarity only")
@@ -749,7 +752,7 @@ class NISTRag:
         if "GDPR" in scope or "PDPL" in scope:
             parts.append("personal data protection privacy customer information")
 
-        raw = " | ".join(parts)[:900]   # cap at 900 chars
+        raw = " | ".join(parts)  # cap at 900 chars
         return BGE_QUERY_INSTRUCTION + raw
 
     # ──────────────────────────────────────────
@@ -1079,7 +1082,7 @@ IMMEDIATE ACTIONS:
                     contents=prompt,
                     config=types.GenerateContentConfig(
                         temperature=0.1,
-                        max_output_tokens=600,
+                        max_output_tokens=2048,
                         top_p=0.8,
                     ),
                 )

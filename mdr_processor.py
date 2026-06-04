@@ -153,7 +153,7 @@ Return JSON for this actor only:
         contents=prompt,
         config=types.GenerateContentConfig(
             temperature=0.0,
-            max_output_tokens=800,
+            max_output_tokens=2048,
         ),
     )
 

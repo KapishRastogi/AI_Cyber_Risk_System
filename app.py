@@ -23,6 +23,10 @@ Results folder (created next to app.py):
     ├── mdr_parsed.json
     └── mdr_changes.json
 """
+import os
+os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
+os.environ["OMP_NUM_THREADS"] = "1"
+os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
 import streamlit as st
 import pandas as pd
